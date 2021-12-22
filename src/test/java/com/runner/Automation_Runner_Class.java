@@ -1,0 +1,80 @@
+package com.runner;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.WebDriver;
+import com.base.Base_class;
+import com.pomanager.Page_Object_Manager;
+
+public class Automation_Runner_Class extends Base_class {
+	
+	public static WebDriver driver = browserLaunch("chrome");
+	public static Page_Object_Manager pom = new Page_Object_Manager(driver);
+	public static Logger log = Logger.getLogger(Automation_Runner_Class.class);
+
+	public static void main(String[] args) throws InterruptedException, Throwable {
+		PropertyConfigurator.configure("log4j.properties");
+		log.info("Browser launched");
+		get("http://automationpractice.com/index.php");
+		log.info("URL launched");
+		getCurrentUrl();
+		getTitle();
+		ElementClick(pom.getInstanceSp().getSignin());
+		getTitle();
+		String email = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 2, 5);
+		ElementSendKeys(pom.getInstanceLp().getEmail(), email);
+		printAttribute(pom.getInstanceLp().getEmail());
+		ElementClick(pom.getInstanceLp().getCreateAcc());
+		String cfname = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 5, 5);
+		ElementSendKeys(pom.getInstanceCap().getCFirstname(), cfname);
+		printAttribute(pom.getInstanceCap().getCFirstname());
+		String clname = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 6, 5);
+		ElementSendKeys(pom.getInstanceCap().getCLastname(), clname);
+		printAttribute(pom.getInstanceCap().getCLastname());
+		printAttribute(pom.getInstanceCap().getEmail());
+		String pswd = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 7, 5);
+		ElementSendKeys(pom.getInstanceCap().getPassword(), pswd);
+		dropdownIsMultiple(pom.getInstanceCap().getDays());
+		dropdown("value", pom.getInstanceCap().getDays(), "1");
+		dropdownIsMultiple(pom.getInstanceCap().getMonth());
+		dropdown("index", pom.getInstanceCap().getMonth(), "1");
+		dropdownIsMultiple(pom.getInstanceCap().getYear());
+		dropdown("value", pom.getInstanceCap().getYear(), "2015");
+		String fname = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 11, 5);
+		ElementSendKeys(pom.getInstanceCap().getFirstName(), fname);
+		String lname = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 12, 5);
+		ElementSendKeys(pom.getInstanceCap().getLastName(),lname);
+		String comp = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 13, 5);
+		ElementSendKeys(pom.getInstanceCap().getCompany(), comp);
+		printAttribute(pom.getInstanceCap().getCompany());
+		String address1 = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 14, 5);
+		ElementSendKeys(pom.getInstanceCap().getAddress1(), address1);
+		printAttribute(pom.getInstanceCap().getAddress1());
+		String address2 = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 15, 5);
+		ElementSendKeys(pom.getInstanceCap().getAddress2(), address2);
+		printAttribute(pom.getInstanceCap().getAddress2());
+		String city = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 16, 5);
+		ElementSendKeys(pom.getInstanceCap().getCity(), city);
+		dropdown("index",pom.getInstanceCap().getState(),"1");
+		dropdownOption(pom.getInstanceCap().getState());
+		String pincode = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 17, 5);
+		ElementSendKeys(pom.getInstanceCap().getPostcode(), pincode);
+		printAttribute(pom.getInstanceCap().getPostcode());
+		printAttribute(pom.getInstanceCap().getCountry());
+		String othernum = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 18, 5);
+		ElementSendKeys(pom.getInstanceCap().getOther(), othernum);
+		String mobile = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 20, 5);
+		ElementSendKeys(pom.getInstanceCap().getPhone(), mobile);
+		String mobile1 = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 19, 5);
+		ElementSendKeys(pom.getInstanceCap().getMobilenumber(), mobile1);
+		printAttribute(pom.getInstanceCap().getMobilenumber());
+		ElementClear(pom.getInstanceCap().getAliasAddress());
+		String aliasAddress = read_Particular_Data("E:\\Java Selenium Testing\\Tasks and time sheet\\Test Cases\\Automation Practice-TestCases.xlsx", 21, 5);
+		ElementSendKeys(pom.getInstanceCap().getAliasAddress(), aliasAddress);
+		printAttribute(pom.getInstanceCap().getAliasAddress());
+		ElementClick(pom.getInstanceCap().getSubmitAccount());
+		log.info("Account Created");
+		takesScreenShot(".\\\\Screenshot\\\\automation.png");
+		quit();
+		log.info("Session closed");
+	}
+}
